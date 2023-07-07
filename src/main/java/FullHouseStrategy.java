@@ -6,10 +6,9 @@ public class FullHouseStrategy implements SimpleStrategy {
 
 	private static final int EXPECTED_GROUPS_COUNT = 2;
 	private static final int EXPECTED_GROUPS_SIZE = 2;
-	
 
 	@Override
-	public int calculateScore(List<Integer> combination) {
+	public int calculateSimpleScore(List<Integer> combination) {
 		
 		Map<Integer, Integer> map = new TreeMap<>();
 		combination.stream()
@@ -24,7 +23,9 @@ public class FullHouseStrategy implements SimpleStrategy {
 				                  .anyMatch( value -> value == EXPECTED_GROUPS_SIZE || value == EXPECTED_GROUPS_SIZE + 1 );
 		
 		if (perfectMatch) {
-          return combination.stream().mapToInt(Integer::valueOf).sum();  			
+          return combination.stream()
+        		            .mapToInt(Integer::valueOf)
+        		            .sum();  			
 		}
 			
 		return 0;

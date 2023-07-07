@@ -10,6 +10,11 @@ public class OfAKindStrategy implements Strategy {
 	@Override
 	public int calculateScore(List<Integer> combination, int key) {
 		
+		if(key != MAX_GROUPS-2 && key != MAX_GROUPS-1) {
+			String exceptionMessage = String.format("'key' argument cannot have different values than %s or %s.", MAX_GROUPS-2, MAX_GROUPS-1);
+			throw new IllegalArgumentException(exceptionMessage);
+		}
+		
 		Map<Integer, Integer> map = new HashMap<>();
 		combination.stream()
 		           .forEach(dice -> {

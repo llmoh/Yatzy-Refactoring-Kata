@@ -11,7 +11,8 @@ public class Yatzy {
     {
     	if( !validateDiceScore(d1) || !validateDiceScore(d2) ||!validateDiceScore(d3) 
     			                   ||!validateDiceScore(d4) || !validateDiceScore(d5)) {
-    		throw new IllegalArgumentException();
+    		String exceptionMessage = String.format("Dices score can only have values between %s and %s", MIN_SCORE, MAX_SCORE);
+    		throw new IllegalArgumentException(exceptionMessage);
     	}
     	
     	dicesCombination.add(d1);
@@ -36,71 +37,71 @@ public class Yatzy {
     public int ones() {
     	
         Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.ONE.value);
+        return ctx.getScore(dicesCombination, DicesScore.ONE.value);
     }
 
     public int twos() {
     	Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.TWO.value);
+        return ctx.getScore(dicesCombination, DicesScore.TWO.value);
     }
 
     public int threes() {
     	Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.THREE.value);
+        return ctx.getScore(dicesCombination, DicesScore.THREE.value);
     }
 
     public int fours()
     {
     	Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.FOUR.value);
+        return ctx.getScore(dicesCombination, DicesScore.FOUR.value);
     }
 
     public int fives()
     {
     	Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.FIVE.value);
+        return ctx.getScore(dicesCombination, DicesScore.FIVE.value);
     }
 
     public int sixes()
     {
     	Context ctx = new Context(new CountSimilarDicesStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.SIX.value);
+        return ctx.getScore(dicesCombination, DicesScore.SIX.value);
     }
 
     public int scorePair()
     {
     	Context ctx = new Context(new PairStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.ONE.value);
+        return ctx.getScore(dicesCombination, DicesScore.ONE.value);
     }
 
     public int twoPair()
     {
     	Context ctx = new Context(new PairStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.TWO.value);
+        return ctx.getScore(dicesCombination, DicesScore.TWO.value);
     }
 
     public int fourOfAKind()
     {
     	Context ctx = new Context(new OfAKindStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.FOUR.value);
+        return ctx.getScore(dicesCombination, DicesScore.FOUR.value);
     }
 
     public int threeOfAKind()
     {
     	Context ctx = new Context(new OfAKindStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.THREE.value);
+        return ctx.getScore(dicesCombination, DicesScore.THREE.value);
     }
 
     public int smallStraight()
     {
     	Context ctx = new Context(new StraightStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.FOUR.value);
+        return ctx.getScore(dicesCombination, DicesScore.FOUR.value);
     }
 
     public int largeStraight()
     {
     	Context ctx = new Context(new StraightStrategy());
-        return ctx.getSimpleScore(dicesCombination, DicesScore.FIVE.value);
+        return ctx.getScore(dicesCombination, DicesScore.FIVE.value);
     }
 
     public int fullHouse()

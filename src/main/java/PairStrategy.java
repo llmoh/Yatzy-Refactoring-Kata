@@ -14,6 +14,11 @@ public class PairStrategy implements Strategy {
 	@Override
 	public int calculateScore(List<Integer> combination, int key) {
 		
+		if(key != PAIR-1 && key != PAIR) {
+			String exceptionMessage = String.format("'key' argument cannot have different values than %s or %s.", PAIR-1, PAIR);
+			throw new IllegalArgumentException(exceptionMessage);
+		}
+		
 		Map<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
 		combination.stream()
 		           .forEach(dice -> {
@@ -31,7 +36,7 @@ public class PairStrategy implements Strategy {
 			  countPair ++;
 			  score+= (int) e.getKey();
 		  }
-		  
+		  // key represents the number of pairs we are going to count.
 		  if(countPair >= key) return score * 2;
 		}
 		

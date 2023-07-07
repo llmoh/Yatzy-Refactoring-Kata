@@ -8,9 +8,14 @@ public class StraightStrategy implements Strategy {
 	private static final int MAX_GROUPS = 5;
 	private static final int SCORE = 5;
 	
-	
 	@Override
 	public int calculateScore(List<Integer> combination, int key) {
+		
+		if(key != MAX_GROUPS-1 && key != MAX_GROUPS) {
+			String exceptionMessage = String.format("'key' argument cannot have different values than %s or %s.", MAX_GROUPS-1, MAX_GROUPS);
+			throw new IllegalArgumentException(exceptionMessage);
+		}
+		
 		Map<Integer, Integer> map = new TreeMap<>();
 		combination.stream()
 		           .forEach(dice -> {

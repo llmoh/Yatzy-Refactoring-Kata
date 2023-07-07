@@ -1,9 +1,14 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -137,6 +142,26 @@ public class YatzyTest {
     @CsvFileSource(resources = "/invalid-data.csv", numLinesToSkip = 1) 
     @Order(160)
     public void invalidDiceScoreTest(int d1, int d2, int d3, int d4, int d5) {
-    	assertThrows(IllegalArgumentException.class, ()->{new Yatzy(d1,d2,d3,d4,d5);});
+    	assertThrows(IllegalArgumentException.class, ()->{ new Yatzy(d1,d2,d3,d4,d5); });
     }
+    
+    @DisplayName("Test illegal arguments On Game Strategies")
+    @Test
+    @Order(170)
+    public void illegalArgumentOnStrategyTest() {
+    	List<Integer> dicesCombination = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+    	assertThrows(IllegalArgumentException.class, ()->{ 
+    		                                                Context ctx = new Context(new PairStrategy());
+                                                            ctx.getScore(dicesCombination, DicesScore.THREE.value); });
+    	
+    	assertThrows(IllegalArgumentException.class, ()->{ 
+												            Context ctx = new Context(new OfAKindStrategy());
+												            ctx.getScore(dicesCombination, DicesScore.TWO.value); });
+    	
+    	assertThrows(IllegalArgumentException.class, ()->{ 
+												            Context ctx = new Context(new StraightStrategy());
+												            ctx.getScore(dicesCombination, DicesScore.TWO.value); });
+    }
+    
+    
 }
