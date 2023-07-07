@@ -4,14 +4,21 @@ import java.util.List;
 public class Yatzy {
 	
 	private List<Integer> dicesCombination = new ArrayList<>();
+	private static final int MAX_SCORE = 6;
+	private static final int MIN_SCORE = 1;
     
     public Yatzy(int d1, int d2, int d3, int d4, int d5)
     {
-        dicesCombination.add(d1);
+    	if( !validateDiceScore(d1) || !validateDiceScore(d2) ||!validateDiceScore(d3) 
+    			                   ||!validateDiceScore(d4) || !validateDiceScore(d5)) {
+    		throw new IllegalArgumentException();
+    	}
+    	
+    	dicesCombination.add(d1);
         dicesCombination.add(d2);
         dicesCombination.add(d3);
         dicesCombination.add(d4);
-        dicesCombination.add(d5);     
+        dicesCombination.add(d5);     	    
     }
 
     public int chance()
@@ -101,6 +108,10 @@ public class Yatzy {
         Context ctx = new Context(new FullHouseStrategy());
         return ctx.getScore(dicesCombination);
     }
+    
+    private boolean validateDiceScore(int diceScore) {	
+		return diceScore >= MIN_SCORE && diceScore <= MAX_SCORE ? true : false;
+	}
 }
 
 
